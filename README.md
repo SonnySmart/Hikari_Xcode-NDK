@@ -21,7 +21,7 @@ cp -r Hikari.xctoolchain/usr/* $NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64
 cp -r $NDK_PATH/toolchains/llvm $NDK_PATH/toolchains/arm-linux-androideabi-llvm  
 cp -r $NDK_PATH/build/core/toolchains/arm-linux-androideabi-clang $NDK_PATH/build/core/toolchains/arm-linux-androideabi-llvm    
 修改：  
-arm-linux-androideabi-llvm/setup.mk  
+$NDK_PATH/build/core/toolchains/arm-linux-androideabi-llvm/setup.mk  
 ---------------------------------- 修改前  
 TOOLCHAIN_NAME := arm-linux-androideabi  
 BINUTILS_ROOT := $(call get-binutils-root,$(NDK_ROOT),$(TOOLCHAIN_NAME))  
@@ -32,6 +32,14 @@ TOOLCHAIN_NAME := arm-linux-androideabi
 BINUTILS_ROOT := $(call get-binutils-root,$(NDK_ROOT),$(TOOLCHAIN_NAME))  
 TOOLCHAIN_ROOT := $(call get-toolchain-root,$(TOOLCHAIN_NAME)-llvm)  
 TOOLCHAIN_PREFIX := $(TOOLCHAIN_ROOT)/bin/$(TOOLCHAIN_NAME)-  
+修改:
+$NDK_PATH/build/core/toolchains/setup-toolchain.mk
+把2改为3
+ifneq ($(words $(TARGET_TOOLCHAIN_LIST)),2)
+ifneq ($(words $(TARGET_TOOLCHAIN_LIST)),3)
+    $(call _ndk_error,Expected two items in TARGET_TOOLCHAIN_LIST, \
+        found "$(TARGET_TOOLCHAIN_LIST)")
+endif
   
 自己的安卓项目里面添加  
 Application.mk  
