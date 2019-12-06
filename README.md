@@ -64,3 +64,6 @@ android默认编译是导出所有符号的需要隐藏起来
     Symbols Hidden by Default -> Yes
 ## 通过上述设置，库内部的函数符号就可以隐藏了。而我们需要一些导出函数给其他人用的话，可以在需要导出的函数前面加上：         
     __attribute__((visibility("default")))
+
+[ELF学习日记-Android SO库文件头分析](https://blog.micblo.com/2018/02/10/Android-SO%E5%BA%93%E6%96%87%E4%BB%B6%E5%A4%B4%E5%88%86%E6%9E%90/)
+[so .text段加密问题记录](https://www.jianshu.com/p/0b0b16211d30)
