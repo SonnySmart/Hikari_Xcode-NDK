@@ -68,3 +68,5 @@ android默认编译是导出所有符号的需要隐藏起来
 [ELF学习日记-Android SO库文件头分析](https://blog.micblo.com/2018/02/10/Android-SO%E5%BA%93%E6%96%87%E4%BB%B6%E5%A4%B4%E5%88%86%E6%9E%90/)
   
 [so .text段加密问题记录](https://www.jianshu.com/p/0b0b16211d30)
+
+[UPX压缩壳](https://github.com/upx/upx)
