@@ -45,8 +45,22 @@ endif
 Application.mk  
 NDK_TOOLCHAIN_VERSION := llvm  
 需要处理的Android.mk  
-android默认编译是导出所有符号的需要隐藏起来  
-# -fvisibility=hidden 添加隐藏导出符号  
-# -mllvm -enable-strcry 加密字符串  
-LOCAL_CFLAGS += -fvisibility=hidden \  
-                -mllvm -enable-strcry  
+android默认编译是导出所有符号的需要隐藏起来                  
+# 如何隐藏C/C++编译生成的函数符号  
+二进制文件中包含了代码中的字符串，在运行中这些字符串将被加载到内存中，被程序所采用。这些字符串如果不做特殊处理，那么通过一些反编译工具（如IDA Pro等）能全部看得到。  
+## 回到函数符号的隐藏，一般可以在gcc编译选项中加入如下编译选项：  
+-ffunction-sections, -fdata-sections会使compiler为每个function和data item分配独立的section。 --gc-sections会使ld删除没有被使用的section。
+链接操作以section作为最小的处理单元，只要一个section中有某个符号被引用，该section就会被放入output中。
+这些选项一起使用会从最终的输出文件中删除所有未被使用的function和data， 只包含用到的unction和data。 
+
+    CFLAGS = -ffunction-sections -fdata-sections -fvisibility=hidden -mllvm -enable-strcry
+    LDFLAGS += -Wl,--gc-sections
+## 在xcode中，需要修改如下编译选项（加粗部分）：
+    Strip Stype -> Non-Global Symbols  
+    Use Separate Strip -> Yes
+    Other Linker Flags -> -Xlinker -x
+    Debug Information Level -> Line Tables only
+    Generate Debug Symbols -> No
+    Symbols Hidden by Default -> Yes
+## 通过上述设置，库内部的函数符号就可以隐藏了。而我们需要一些导出函数给其他人用的话，可以在需要导出的函数前面加上：         
+    __attribute__((visibility("default")))
