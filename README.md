@@ -53,7 +53,7 @@ android默认编译是导出所有符号的需要隐藏起来
 链接操作以section作为最小的处理单元，只要一个section中有某个符号被引用，该section就会被放入output中。
 这些选项一起使用会从最终的输出文件中删除所有未被使用的function和data， 只包含用到的unction和data。 
 
-    CFLAGS = -ffunction-sections -fdata-sections -fvisibility=hidden -mllvm -enable-strcry
+    CFLAGS += -ffunction-sections -fdata-sections -fvisibility=hidden -mllvm -enable-strcry
     LDFLAGS += -Wl,--gc-sections
 ## 在xcode中，需要修改如下编译选项（加粗部分）：
     Strip Stype -> Non-Global Symbols  
