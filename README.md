@@ -70,3 +70,9 @@ android默认编译是导出所有符号的需要隐藏起来
 [so .text段加密问题记录](https://www.jianshu.com/p/0b0b16211d30)
 
 [UPX压缩壳](https://github.com/upx/upx)
+
+#获取导出函数技巧
+    
+    windows linux bash
+    c++filt _ZN3art7DexFile10OpenMemoryEPKhjRKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEEjPNS_6MemMapEPKNS_10OatDexFileEPS9_
+    art::DexFile::OpenMemory(unsigned char const*, unsigned int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, unsigned int, art::MemMap*, art::OatDexFile const*, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >*)
