@@ -71,7 +71,7 @@ android默认编译是导出所有符号的需要隐藏起来
 
 [UPX压缩壳](https://github.com/upx/upx)
 
-#获取导出函数技巧
+# 获取导出函数技巧
     
     windows linux bash
     c++filt _ZN3art7DexFile10OpenMemoryEPKhjRKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEEjPNS_6MemMapEPKNS_10OatDexFileEPS9_
